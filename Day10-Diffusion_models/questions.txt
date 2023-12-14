@@ -1,0 +1,13 @@
+1. In the lectures you showed us images slideshows that displayed what a diffusion model can do. They looked like Person's face > Animal > Person's face. (You was illustrating that we dont need to use gaussian noise, rather just any transformation.) For some of the slideshows, faces would transform (for example into a tiger) and then once the were denoised/sampled, the face was completely different. Im wondering if this behaviour is intended? or if like a VAE we should have expected them to fade back to the initial image.
+
+2. In the equations for the diffusion model backwards pass equivalent:
+
+[ roughly x_new = sqrt a_t * (x_t - ((1-a_t)/(1-a_bar_t)) * model(x_t, t) ) + (sqrt b_t * z)]
+
+I understand that we are scaling the predicted original image by the "amount" of the initial image (sqrt a_t * (x_t - ((1-a_t)/(1-a_bar_t)) * model(x_t, t))) and adding that to the noise equivalent calculation (sqrt b_t * z), but What i dont understand is why we are using sqrt a_t and sqrt b_t as scalers rather than just a_t and b_t. Why are we using the squares of these values?
+
+3. I understand the code you use to generate samples. But what i dont quite understand is where this works with the structure of unet's in mind. 
+
+It seems that x is random noise (from x = torch.randn_like(next(iter(dataloader))[0])), When we sample do reverse diffusion. Im wondering if we are essientially starting from the bottleneck section of the U-Net? or am i completely confused.
+
+
